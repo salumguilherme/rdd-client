@@ -316,6 +316,9 @@ const ListCsvItem = ({ id }) => {
 												if(value > csv.totaRows) {
 													return;
 												}
+												if(value == csv.maxRows) {
+													return;
+												}
 												updateCsvData({
 													variables: {
 														id,
