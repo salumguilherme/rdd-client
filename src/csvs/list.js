@@ -296,7 +296,7 @@ const ListCsvItem = ({ id }) => {
 								<Title
 									level={3}
 									style={{margin: 0 }}
-								>{formatNumber(csv.totalRows)}</Title>
+								>{formatNumber(csv.totalRows - 1)}</Title>
 							</Space>
 						</Col>
 						{csv.csvType == 'PhoneList' && (
@@ -341,7 +341,7 @@ const ListCsvItem = ({ id }) => {
 										<Title
 											level={3}
 											style={{margin: 0 }}
-										>{formatNumber(csv.processRows)}</Title>
+										>{formatNumber(csv.processRows - 1)}</Title>
 									</Space>
 								</Col>
 								<Col span={6}>
