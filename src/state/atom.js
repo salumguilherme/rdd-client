@@ -42,7 +42,7 @@ export const tokenAtom = atom((get) => {
 export const appPageAtom = atom('csvs-list');
 export const appCsvListFilterStatus = atomWithStorage('csvListFilterStatus', []);
 export const appCsvListFilterType = atomWithStorage('csvListFilterType', []);
-export const appCsvListFilterClient = atomWithStorage([], 'csvListFilterClient');
+export const appCsvListFilterClient = atomWithStorage('csvListFilterClient', []);
 
 
 
