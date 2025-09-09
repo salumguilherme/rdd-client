@@ -379,7 +379,7 @@ const ListCsvItem = ({ id }) => {
 									onChange: (val) => {
 										if(!val || isNaN(val)) return;
 										const value = parseInt(val);
-										if(val < 1 || val > 50) {
+										if(val < 10 || val > 50) {
 											return;
 										}
 										updateCsvData({

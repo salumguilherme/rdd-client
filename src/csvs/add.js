@@ -186,7 +186,7 @@ const AddCsvForm = () => {
 				{listType != 'ExclusionList' && (
 					<Form.Item label="Queue Batch Size" name="batchSize" rules={[{ required: true, message: "Enter a number for the queue size" }]}>
 						<Space>
-							<InputNumber min={1} max={50} />
+							<InputNumber min={10} max={50} />
 							<Tooltip title="Enter how many rows the queue processes per run. The queue size is the batchSize multiplied by 4. So if you enter 10, the queue will process 40 rows at a time.">
 								<QuestionCircleOutlined />
 							</Tooltip>
