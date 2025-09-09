@@ -341,7 +341,7 @@ const ListCsvItem = ({ id }) => {
 										<Title
 											level={3}
 											style={{margin: 0 }}
-										>{formatNumber(csv.processRows - 1)}</Title>
+										>{formatNumber(csv.processRows > 0 ? csv.processRows - 1 : 0)}</Title>
 									</Space>
 								</Col>
 								<Col span={6}>
