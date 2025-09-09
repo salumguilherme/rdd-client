@@ -36,3 +36,61 @@
     transform: rotate(360deg);
   }
 }
+
+
+.list-csvs {
+	display: flex !important;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: space-between;
+	width: 100%;
+	gap: 30px;
+	box-sizing: content-box;
+}
+
+.list-csvs-item {
+	flex: 0 0 100%;
+	margin: 0;
+	width: 100%;
+}
+
+.list-csvs * {
+	box-sizing: content-box;
+}
+
+.list-csvs a {
+	word-wrap: break-word;
+}
+
+.ant-card-head-title .ant-typography-edit-content {
+	margin: 0;
+	inset-inline-start: 0;
+	display: flex;
+}
+
+.ant-card-head-title .ant-typography-edit-content textarea.ant-input {
+	max-height: 15px;
+	padding: 0 10px;
+	line-height: 34px;
+	max-width: initial;
+	display: block;
+	min-width: 300px;
+}
+
+.ant-descriptions-item-content .ant-typography {
+	inset-inline-start: 0;
+	margin: 0;
+	display: flex;
+}
+
+.ant-descriptions-item-content .ant-typography textarea.ant-input {
+	max-height: 15px;
+	padding: 0 10px;
+	line-height: 32px;
+	max-width: initial;
+	display: block;
+}
+
+.ant-descriptions-item-container {
+	align-items: center;
+}
