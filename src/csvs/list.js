@@ -629,7 +629,20 @@ const getCsvDropdownActions = (csv, { deleteHandler, restartCsv, updateCsvStatus
 				label: 'Restart',
 				icon: <ReloadOutlined />,
 				onClick: () => {
-					restartCsv(csv.id);
+					restartCsv();
+				}
+			},
+			{
+				key: 'restart-force-get',
+				label: 'Restart and Force GET Requests',
+				icon: <ReloadOutlined />,
+				onClick: () => {
+					restartCsv({
+						variables: {
+							id: csv.id,
+							forceGet: true
+						}
+					});
 				}
 			}
 		]

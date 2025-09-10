@@ -2,8 +2,8 @@ import { gql } from "@apollo/client";
 import { CsvFragment, ClientFragment } from './fragments';
 
 export const RESTART_CSV_MUTATION = gql`
-    mutation restartCsvList($id:ID!) {
-        restartCsv(id:$id) {
+    mutation restartCsvList($id:ID!, $forceGet:Boolean) {
+        restartCsv(id:$id, forceGet:$forceGet) {
             success
             message
             code
