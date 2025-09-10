@@ -162,7 +162,7 @@ const AddCsvForm = () => {
 						</Tooltip>
 					</Space>
 				</Form.Item>
-				<Form.Item label="List URL" name="url" rules={[{ required: true, message: "Select a list URL. One per line." }]}>
+				<Form.Item label="List URL" name="url" rules={[{ required: true, message: "Select a list URL. One per line or separated by comma." }]}>
 					<Input.TextArea autoSize/>
 				</Form.Item>
 				<Form.Item label="List Name" name="name">
