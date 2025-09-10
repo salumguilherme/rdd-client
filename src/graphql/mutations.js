@@ -65,7 +65,7 @@ export const ADD_CSV_MUTATION = gql`
 			success
 			code
 			message
-			csv {
+			csvs {
 				...CsvFragment
 			}
 			client {

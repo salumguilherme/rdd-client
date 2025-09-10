@@ -56,9 +56,12 @@ const AddCsvForm = () => {
 			if(data.addCsv.success) {
 
 				// Adds the new Csv to our state
-				if(data.addCsv.csv) {
-					// Adds the new Csv to our list
-					addNewCsvStateAtom(data.addCsv.csv);
+				if(data.addCsv.csvs && data.addCsv.csvs.length > 0) {
+
+					for(const singleCsv of data.addCsv.csvs) {
+						// Adds the new Csv to our list
+						addNewCsvStateAtom(singleCsv);
+					}
 				}
 
 				// If we have a client - ensure to update our client atom family
