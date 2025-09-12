@@ -40,9 +40,9 @@ export const tokenAtom = atom((get) => {
 
 // App State atoms
 export const appPageAtom = atom('csvs-list');
-export const appCsvListFilterStatus = atomWithStorage('csvListFilterStatus', []);
-export const appCsvListFilterType = atomWithStorage('csvListFilterType', []);
-export const appCsvListFilterClient = atomWithStorage('csvListFilterClient', []);
+export const appCsvListFilterStatus = atom([]);
+export const appCsvListFilterType = atom([]);
+export const appCsvListFilterClient = atom([]);
 
 
 
