@@ -28,7 +28,7 @@ export const ListCsvs = () => {
 const ListCsvsWrap = () => {
 
 	// Query
-		const { loading, error, data, startPolling, networkStatus, refetch, subscribeToMore } = useQuery(GET_CSVS_QUERY, {
+	const { loading, error, data, startPolling, networkStatus, refetch, subscribeToMore } = useQuery(GET_CSVS_QUERY, {
 		pollingInterval: 500,
 		fetchPolicy: 'network-only',
 		skipPollAttempt: () => {

@@ -5,6 +5,7 @@ import { AddClient } from './clients/add';
 import { ListClients } from './clients/list';
 import { AddCsvs } from './csvs/add';
 import { ListCsvs } from './csvs/list';
+import { CsvsReport } from './csvs/report';
 import { LoginScreen } from './login/Login';
 import '@ant-design/v5-patch-for-react-19';
 import './App.css';
@@ -50,6 +51,10 @@ const sidebarMenuItems = [
 			{
 				key: 'csvs-add',
 				label: 'Add New List',
+			},
+			{
+				key: 'csvs-report',
+				label: 'Job Report',
 			}
 		]
 	},
@@ -136,6 +141,9 @@ const AppContentArea = () => {
 			)}
 			{appPage == 'csvs-add' && (
 				<AddCsvs />
+			)}
+			{appPage == 'csvs-report' && (
+				<CsvsReport />
 			)}
 			{appPage == 'clients-list' && (
 				<ListClients />

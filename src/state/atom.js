@@ -142,6 +142,22 @@ export const filteredCsvListAtom = atom(get => {
 
 });
 
+export const csvReportTableDataAtom = atom(get => {
+	return get(filteredCsvListAtom).map(csvId => {
+		const csv = get(csvAtomFamily({ id: csvId }));
+		return {
+			key: csv.id,
+			name: csv.name,
+			jobStatus: csv.jobStatus == 'Pending' ? 'processing' : csv.jobStatus.toLowerCase(),
+			csvType: csv.csvType,
+			maxRows: csv.maxRows,
+			connectedRows: csv.connectedRows,
+			processRows: csv.processRows,
+			postRequestCount: csv.postRequestCount
+		}
+	});
+})
+
 
 // State for our clients
 export const clientHasFetchedAtom = atom(false);
