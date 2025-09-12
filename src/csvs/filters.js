@@ -47,14 +47,14 @@ const ListCsvFilterType = () => {
 // Filter by status
 const ListCsvFilterStatus = () => {
 
-	const setFilterStatus = useSetAtom(appCsvListFilterStatus);
+	const [filterStatus, setFilterStatus] = useAtom(appCsvListFilterStatus);
 
 	return (
 		<Space direction="vertical">
 			<label style={{ fontWeight: 'bold', fontSize: 14 }}>Status</label>
 			<Select filterOption={(input, option) =>
 				(option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-			} mode="multiple" size="small" allowClear style={{ width: 155 }} placeholder="– Status" options={[
+			} mode="multiple" defaultValue={filterStatus} size="small" allowClear style={{ width: 155 }} placeholder="– Status" options={[
 				{
 					value: 'Pending',
 					label: 'Processing',
@@ -86,7 +86,7 @@ const ListCsvFilterStatus = () => {
 // Filter by status
 const ListCsvFilterClient = () => {
 
-	const setFilterClient = useSetAtom(appCsvListFilterClient);
+	const [filterClient, setFilterClient] = useAtom(appCsvListFilterClient);
 	const clientList = useAtomValue(clientSelectOptionsAtom);
 
 
@@ -95,7 +95,7 @@ const ListCsvFilterClient = () => {
 			<label style={{ fontWeight: 'bold', fontSize: 14 }}>Client</label>
 			<Select filterOption={(input, option) =>
 				(option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-			} mode="multiple" size="small" allowClear style={{ width: 155 }} placeholder="– Client" options={[ { value: '__not', label: 'Unassigned' }, ...clientList]}
+			} mode="multiple" size="small" defaultValue={filterClient} allowClear style={{ width: 155 }} placeholder="– Client" options={[ { value: '__not', label: 'Unassigned' }, ...clientList]}
 			        onChange={(val) => {
 				        setFilterClient(val);
 			        }}/>
