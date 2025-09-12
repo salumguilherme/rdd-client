@@ -13,7 +13,7 @@ import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 
 const httpLink = createHttpLink({
-	uri: 'http://localhost:5050/graphql'
+	uri: 'https://leadlistrdd.server.fivecreative.com.au/graphql'
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -32,7 +32,7 @@ const token = _token ? JSON.parse(_token) : undefined;
 
 const wsLink = new GraphQLWsLink(
 	createClient({
-		url: "ws://localhost:5050/subscriptions",
+		url: "https://leadlistrdd.server.fivecreative.com.au/subscriptions",
 		connectionParams: {
 			authToken: token,
 		}
