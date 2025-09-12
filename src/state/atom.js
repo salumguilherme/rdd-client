@@ -143,7 +143,7 @@ export const filteredCsvListAtom = atom(get => {
 });
 
 export const csvReportTableDataAtom = atom(get => {
-	return get(filteredCsvListAtom).map(csvId => {
+	return get(filteredCsvListAtom).reverse().map(csvId => {
 		const csv = get(csvAtomFamily({ id: csvId }));
 		return {
 			key: csv.id,
