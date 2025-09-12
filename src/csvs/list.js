@@ -7,8 +7,8 @@ import React, { useEffect, useState } from 'react';
 import { gql } from "@apollo/client";
 import { CHANGE_STATUS_CSV_MUTATION, DELETE_CSV_MUTATION, PAUSE_CSV_MUTATION, RESTART_CSV_MUTATION, UPDATE_CSV_DATA_MUTATION } from '../graphql/mutations';
 import { GET_CSV_QUERY, GET_CSVS_QUERY } from '../graphql/queries';
-import { CSV_STATUS_SUBSCRIPTION } from '../graphql/subscriptions';
-import { clientListAtom, clientSelectOptionsAtom, csvAtomFamily, csvHasFetched, csvListAtom, deleteCsvListAtom, filteredCsvListAtom } from '../state/atom';
+import { CSV_CHANGED_SUBSCRIPTION, CSV_STATUS_SUBSCRIPTION } from '../graphql/subscriptions';
+import { addCsvListAtom, clientListAtom, clientSelectOptionsAtom, csvAtomFamily, csvHasFetched, csvListAtom, deleteCsvListAtom, filteredCsvListAtom, updateCsvListAtom } from '../state/atom';
 import { formatNumber } from '../utils';
 import { ListCsvsFilters } from './filters';
 
@@ -28,14 +28,14 @@ export const ListCsvs = () => {
 const ListCsvsWrap = () => {
 
 	// Query
-	const { loading, error, data, startPolling, networkStatus, refetch } = useQuery(GET_CSVS_QUERY, {
+		const { loading, error, data, startPolling, networkStatus, refetch, subscribeToMore } = useQuery(GET_CSVS_QUERY, {
 		pollingInterval: 500,
 		fetchPolicy: 'network-only',
 		skipPollAttempt: () => {
 			return false
 		}
 	});
-
+			
 	// Has fetched CSV data
 	const [hasFetchedCsvs, setHasFetchedCsvs] = useAtom(csvHasFetched);
 
@@ -43,6 +43,38 @@ const ListCsvsWrap = () => {
 	const setCsvsList = useSetAtom(csvListAtom);
 	const filteredCsvsList = useAtomValue(filteredCsvListAtom);
 	const setClientsList = useSetAtom(clientListAtom);
+	const addCsvToList = useSetAtom(addCsvListAtom);
+	const deleteCsvFromListAtom = useSetAtom(deleteCsvListAtom);
+	const updateCsvItem = useSetAtom(updateCsvListAtom);
+	
+	const useSubscriptiondata = useSubscription(CSV_CHANGED_SUBSCRIPTION, {
+		onData: ({ data }) => {
+			// If we have data
+			if(data && data.data && data.data.csvChanged) {
+
+				const changeType = data.data.csvChanged.changeType;
+
+				// If we are updating - update the atom family
+				if(changeType == 'Updated') {
+					console.log('updated', data.data.csvChanged.csv);
+					updateCsvItem(data.data.csvChanged.csv);
+				}
+
+				// If we have created
+				if(changeType == 'Created') {
+					refetch();
+				}
+
+				// If we have deleted\
+				if(changeType == 'Deleted') {
+					refetch();
+				}
+
+			}
+		}
+	});
+
+	//console.log('CSV_CHANGED_SUBSCRIPTION', useSubscriptiondata);
 
 	// Stores our list data in our atoms
 	useEffect(() => {
@@ -62,6 +94,46 @@ const ListCsvsWrap = () => {
 		if(data && data.clients && data.clients.clients) {
 			setClientsList(data.clients.clients);
 		}
+
+		/*const unsubscribe = subscribeToMore({
+			document: CSV_CHANGED_SUBSCRIPTION,
+			
+		});
+		
+		return () => {
+			unsubscribe();
+		}*/
+
+		// Gets the CSV - so we can use our subscription
+		/*const { subscribeToMore, ...result } = useQuery(GET_CSV_QUERY, {
+			variables: {
+				id
+			}
+		});*/
+
+		/*
+		// Subscribes to status updates if the csv is processing
+		useEffect(() => {
+			if(result.data && result.data.csv && result.data.csv.csv) {
+				const _csv = result.data.csv.csv;
+				if(csv.jobStatus == 'Pending') {
+					const unsubscribe = subscribeToMore({
+						document: CSV_STATUS_SUBSCRIPTION,
+						variables: {
+							id
+						},
+						updateQuery: (prev, { subscriptionData }) => {
+							if (!subscriptionData.data) return prev;
+							setCsv(subscriptionData.data.csvStatus);
+							return Object.assign({}, prev, subscriptionData.data.csvStatus);
+						}
+					});
+					return () => {
+						unsubscribe();
+					}
+				}
+			}
+		}, [result.data, subscribeToMore, csv.jobStatus]);*/
 
 	}, [data]);
 
@@ -139,12 +211,13 @@ const ListCsvItem = ({ id }) => {
 	const deleteCsvFromListAtom = useSetAtom(deleteCsvListAtom);
 
 	// Gets the CSV - so we can use our subscription
-	const { subscribeToMore, ...result } = useQuery(GET_CSV_QUERY, {
+	/*const { subscribeToMore, ...result } = useQuery(GET_CSV_QUERY, {
 		variables: {
 			id
 		}
-	});
+	});*/
 
+	/*
 	// Subscribes to status updates if the csv is processing
 	useEffect(() => {
 		if(result.data && result.data.csv && result.data.csv.csv) {
@@ -166,7 +239,7 @@ const ListCsvItem = ({ id }) => {
 				}
 			}
 		}
-	}, [result.data, subscribeToMore, csv.jobStatus]);
+	}, [result.data, subscribeToMore, csv.jobStatus]);*/
 
 	// Mutations
 	// Restart

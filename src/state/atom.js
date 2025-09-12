@@ -77,8 +77,8 @@ export const addCsvListAtom = atom(null, (get, set, newCsv) => {
 
 	// Adds to the lsit
 	set(_csvListAtom, [
-		...listOfIds,
-		newCsv.id
+		newCsv.id,
+		...listOfIds
 	]);
 
 	// Adds the family
@@ -93,6 +93,11 @@ export const deleteCsvListAtom = atom(null, (get, set, csvId) => {
 	// Delete atom family
 	csvAtomFamily.remove({ id: csvId });
 });
+
+// Updates a CSV list atom
+export const updateCsvListAtom = atom(null, (get, set, newCsv) => {
+	set(csvAtomFamily({ id: newCsv.id }), newCsv);
+})
 
 // Filtered atom list
 export const filteredCsvListAtom = atom(get => {
