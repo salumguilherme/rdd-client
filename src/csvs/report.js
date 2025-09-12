@@ -44,6 +44,10 @@ const columns = [
 		dataIndex: 'jobStatus',
 	},
 	{
+		title: 'Date Created',
+		dataIndex: 'createdDate',
+	},
+	{
 		title: 'Job Type',
 		dataIndex: 'csvType',
 	},

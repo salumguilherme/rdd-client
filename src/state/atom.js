@@ -145,6 +145,7 @@ export const filteredCsvListAtom = atom(get => {
 export const csvReportTableDataAtom = atom(get => {
 	return get(filteredCsvListAtom).reverse().map(csvId => {
 		const csv = get(csvAtomFamily({ id: csvId }));
+		const createdDate = moment(csv.createdAt);
 		return {
 			key: csv.id,
 			name: csv.name,
@@ -152,6 +153,7 @@ export const csvReportTableDataAtom = atom(get => {
 			connectedRows: csv.connectedRows,
 			jobStatus: csv.jobStatus == 'Pending' ? 'processing' : csv.jobStatus.toLowerCase(),
 			csvType: csv.csvType,
+			createdDate: createdDate.format('DD/MM/YYYY'),
 			processRows: csv.processRows,
 			postRequestCount: csv.postRequestCount
 		}
