@@ -32,20 +32,20 @@ const columns = [
 		dataIndex: 'name',
 	},
 	{
-		title: 'Status',
-		dataIndex: 'jobStatus',
-	},
-	{
-		title: 'Job Type',
-		dataIndex: 'csvType',
-	},
-	{
 		title: 'Max Numbers',
 		dataIndex: 'maxRows',
 	},
 	{
 		title: 'Rows Connected',
 		dataIndex: 'connectedRows',
+	},
+	{
+		title: 'Status',
+		dataIndex: 'jobStatus',
+	},
+	{
+		title: 'Job Type',
+		dataIndex: 'csvType',
 	},
 	{
 		title: 'Rows Processed',

@@ -148,10 +148,10 @@ export const csvReportTableDataAtom = atom(get => {
 		return {
 			key: csv.id,
 			name: csv.name,
-			jobStatus: csv.jobStatus == 'Pending' ? 'processing' : csv.jobStatus.toLowerCase(),
-			csvType: csv.csvType,
 			maxRows: csv.maxRows,
 			connectedRows: csv.connectedRows,
+			jobStatus: csv.jobStatus == 'Pending' ? 'processing' : csv.jobStatus.toLowerCase(),
+			csvType: csv.csvType,
 			processRows: csv.processRows,
 			postRequestCount: csv.postRequestCount
 		}
