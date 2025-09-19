@@ -148,6 +148,7 @@ export const csvReportTableDataAtom = atom(get => {
 		const createdDate = moment(csv.createdAt);
 		return {
 			key: csv.id,
+			client: csv.client && csv.client.name ? csv.client.name : '-',
 			name: csv.name,
 			maxRows: csv.maxRows,
 			connectedRows: csv.connectedRows,

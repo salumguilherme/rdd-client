@@ -32,6 +32,10 @@ const columns = [
 		dataIndex: 'name',
 	},
 	{
+		title: 'Client',
+		dataIndex: 'client',
+	},
+	{
 		title: 'Max Numbers',
 		dataIndex: 'maxRows',
 	},
