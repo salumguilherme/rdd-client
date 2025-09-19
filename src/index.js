@@ -26,10 +26,11 @@ const authLink = setContext((_, { headers }) => {
 		const now = moment();
 		if(expire.diff(now) <= 0) {
 			localStorage.removeItem('authToken');
-		}
-		return {
-			headers: {
-				...headers
+
+			return {
+				headers: {
+					...headers
+				}
 			}
 		}
 	}
