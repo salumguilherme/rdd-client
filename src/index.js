@@ -3,6 +3,7 @@ import { ApolloProvider } from '@apollo/client/react';
 import { ConfigProvider, theme } from 'antd';
 import { OperationTypeNode } from 'graphql';
 import { Provider } from 'jotai';
+import moment from 'moment';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -19,6 +20,20 @@ const httpLink = createHttpLink({
 const authLink = setContext((_, { headers }) => {
 	const _token = localStorage.getItem('authToken');
 	const token = _token ? JSON.parse(_token) : undefined;
+
+	if(token && token.expires) {
+		const expire = moment(token.expires);
+		const now = moment();
+		if(expire.diff(now) <= 0) {
+			localStorage.removeItem('authToken');
+		}
+		return {
+			headers: {
+				...headers
+			}
+		}
+	}
+
 	return {
 		headers: {
 			...headers,
